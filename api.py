@@ -89,7 +89,7 @@ async def read_predict_docs():
 
 model = pipeline('text-classification', model='SamLowe/roberta-base-go_emotions')
 
-@app.get("/model",tags=["HugginFace"],description="Operation that calls the HuggingFace API to classify the emotion of a text.")
+@app.get("/model",tags=["HuggingFace"],description="Operation that calls the HuggingFace API to classify the emotion of a text.")
 async def classify_emotion(text: str):
     emotion_prediction = model(text)[0]
     return {"emotion_prediction": emotion_prediction}
