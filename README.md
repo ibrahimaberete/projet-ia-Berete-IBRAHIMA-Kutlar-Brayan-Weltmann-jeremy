@@ -1,3 +1,11 @@
+# Projet IA
+
+## Équipe de Développement
+
+- Jérémy Weltmann
+- Ibrahima Berete
+- Brayan Kutlar
+
 Pour l'éxécution du projet : 
 
 - Tout d'abord télécharger toute les dépendances à l'aide de la commande suivante : 
