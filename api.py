@@ -3,8 +3,12 @@ import pandas as pd
 from typing import List
 import pickle
 import numpy as np
+from transformers import pipeline
 
-app = FastAPI()
+app = FastAPI(    
+    title="Football Prediction API",
+    description="This API allows you to train a model on football match data and make predictions.",
+    version="1.0")
 
 # Load data from data.csv file
 data = pd.read_csv("data.csv")
@@ -82,3 +86,10 @@ async def read_train_docs():
 @app.get("/docs/predict/", tags=["Documentation"], summary="Prediction documentation", description="Documentation for making predictions.")
 async def read_predict_docs():
     return {"message": "Documentation for making predictions"}
+
+model = pipeline('text-classification', model='SamLowe/roberta-base-go_emotions')
+
+@app.get("/model",tags=["HugginFace"],description="Operation that calls the HuggingFace API to classify the emotion of a text.")
+async def classify_emotion(text: str):
+    emotion_prediction = model(text)[0]
+    return {"emotion_prediction": emotion_prediction}
