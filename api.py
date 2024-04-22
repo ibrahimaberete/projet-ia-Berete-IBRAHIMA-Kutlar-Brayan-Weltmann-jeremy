@@ -4,6 +4,7 @@ from typing import List
 import pickle
 import numpy as np
 from transformers import pipeline
+from sklearn.linear_model import LinearRegression
 
 app = FastAPI(    
     title="Football Prediction API",
@@ -40,7 +41,7 @@ async def train_model():
     y = data['goals']
     
     # Example: training a simple linear regression model
-    from sklearn.linear_model import LinearRegression
+
     model = LinearRegression()
     model.fit(X, y)
     trained_model = model

@@ -10,3 +10,4 @@ joblib
 typing
 datetime
 transformers
+scikit-learn
