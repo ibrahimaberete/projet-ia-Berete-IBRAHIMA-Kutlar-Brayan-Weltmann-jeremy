@@ -35,7 +35,7 @@ async def train_model():
             raise HTTPException(status_code=400, detail=f"Column '{column}' not found in the data.")
     
     # Select numeric columns from the data
-    X = data[columns_to_use].select_dtypes(include=['float64', 'int64'])
+    X = data[columns_to_use].select_dtypes(include=['float64', 'int64']).drop(["goals"],axis=1)
     
     # Assuming 'goals' is a target column
     y = data['goals']
