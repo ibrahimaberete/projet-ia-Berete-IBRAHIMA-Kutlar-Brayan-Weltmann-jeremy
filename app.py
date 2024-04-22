@@ -9,10 +9,25 @@ st.set_page_config(
     layout="wide",
 )
 
-st.title("Prédiction Match")
+st.title("Goals prediction")
 
 st.image('https://www.francebleu.fr/s3/cruiser-production/2019/03/a98102ae-5e60-4558-b404-f43cfab46b86/1200x680_coupe-du-monde.jpg')
 
+st.header("Train Model")
+# Form for training data
+with st.form(key='train_form'):
+    train_button = st.form_submit_button(label='Train')
+
+# If train button is clicked, send request to API to train the model
+if train_button:
+    response = requests.post('http://localhost:8000/train/')
+    if response.status_code == 200:
+        st.write(response.json())
+    else:
+        st.write("Error: API request failed.")
+
+
+st.header("Predict Model")
 # Form for input data
 with st.form(key='input_form'):
     game_id = st.number_input('game_id')
@@ -39,18 +54,6 @@ if submit_button:
         minutes_played
     ]
     response = requests.post('http://localhost:8000/predict/', json=[data])
-    if response.status_code == 200:
-        st.write(response.json())
-    else:
-        st.write("Error: API request failed.")
-
-# Form for training data
-with st.form(key='train_form'):
-    train_button = st.form_submit_button(label='Train')
-
-# If train button is clicked, send request to API to train the model
-if train_button:
-    response = requests.post('http://localhost:8000/train/')
     if response.status_code == 200:
         st.write(response.json())
     else:

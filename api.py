@@ -7,7 +7,7 @@ from transformers import pipeline
 from sklearn.linear_model import LinearRegression
 
 app = FastAPI(    
-    title="Football Prediction API",
+    title="Football Goals Prediction API",
     description="This API allows you to train a model on football match data and make predictions.",
     version="1.0")
 
@@ -69,7 +69,9 @@ async def predict(result: List[List[float]]):
     print(type(result))
     print(result)
     predictions = trained_model.predict(np.array(result))
-    return {"predictions": str(predictions)}
+    predictions = np.clip(predictions, 0, None) 
+    rounded_predictions = np.round(predictions)
+    return {"predictions": str(rounded_predictions)}
 
 # Documentation routes
 @app.get("/", tags=["Root"], summary="Root endpoint", description="Welcome message for the API.")
