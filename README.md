@@ -16,11 +16,3 @@ uvicorn api:app --reload
 
 - En parallèle éxécuter la commande suivante pour l'affichage front : 
 streamlit run app.py
-
-Pour tester le bon fonctionnement de notre FASTAPI, il faut tout d'abord exécuter le test d'entrainement.
-Par la suite, il faut réaliser le test suivant pour la prediction avec les entrées suivantes : 
-[
-  [
-    0,2,4,4,5,6,7,5,5
-  ]
-]
